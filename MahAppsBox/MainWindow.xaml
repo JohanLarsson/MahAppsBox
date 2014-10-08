@@ -4,11 +4,12 @@
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                  xmlns:mahAppsBox="clr-namespace:MahAppsBox"
+                 xmlns:vm="clr-namespace:MahAppsBox.ViewModels"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  Title="MainWindow"
                  Width="525"
                  Height="350"
-                 d:DataContext="{d:DesignInstance mahAppsBox:ViewModel}"
+                 d:DataContext="{d:DesignInstance vm:MainWindowViewModel, d:IsDesignTimeCreatable=False}"
                  mc:Ignorable="d">
     <Window.Resources>
         <Style x:Key="LargeTileStyle" TargetType="mah:Tile">
@@ -32,45 +33,54 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        
         <Grid Grid.Row="0" Grid.Column="0">
             <StackPanel>
                 <mah:NumericUpDown Value="{Binding DoubleValue}" />
                 <mah:ToggleSwitch IsChecked="{Binding BoolValue}" />
             </StackPanel>
         </Grid>
+        
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Button Content="Show dialog" Command="{Binding ShowSimpleMessageDialogCommand}" />
+        </StackPanel>
+        
         <mah:FlipView Grid.Row="1" Grid.Column="0">
             <Rectangle Fill="Red" />
             <Rectangle Fill="Blue" />
             <Rectangle Fill="Yellow" />
         </mah:FlipView>
-        <WrapPanel Grid.Row="1" Grid.Column="1">
-            <mah:Tile Title="Mail"
-                      Margin="3"
-                      Background="Teal"
-                      Content="ImageHere"
-                      Style="{StaticResource LargeTileStyle}" />
-            <!--
-                <mah:Tile Title="Desktop" Style="{StaticResource LargeTileStyle}"  Margin="3">
-                <mah:Tile.Background>
-                <ImageBrush ImageSource="Images/windesktop.jpg" />
-                </mah:Tile.Background>
-                </mah:Tile>
-            -->
-            <mah:Tile Title="Finance"
-                      Background="Green"
-                      Style="{StaticResource LargeTileStyle}" />
-            <mah:Tile Title="People"
-                      Background="#D2691E"
-                      Style="{StaticResource LargeTileStyle}" />
-            <mah:Tile Title="Weather"
-                      Background="#1E90FF"
-                      Style="{StaticResource LargeTileStyle}" />
-            <mah:Tile Title="Weather"
-                      Background="#1E90FF"
-                      Style="{StaticResource SmallTileStyle}" />
-            <mah:Tile Title="Store"
-                      Background="Green"
-                      Style="{StaticResource SmallTileStyle}" />
-        </WrapPanel>
+        
+        <ScrollViewer Grid.Row="1" Grid.Column="1">
+            <WrapPanel>
+                <mah:Tile Title="Mail"
+                          Margin="3"
+                          Background="Teal"
+                          Content="ImageHere"
+                          Style="{StaticResource LargeTileStyle}" />
+                <!--
+                    <mah:Tile Title="Desktop" Style="{StaticResource LargeTileStyle}"  Margin="3">
+                    <mah:Tile.Background>
+                    <ImageBrush ImageSource="Images/windesktop.jpg" />
+                    </mah:Tile.Background>
+                    </mah:Tile>
+                -->
+                <mah:Tile Title="Finance"
+                          Background="Green"
+                          Style="{StaticResource LargeTileStyle}" />
+                <mah:Tile Title="People"
+                          Background="#D2691E"
+                          Style="{StaticResource LargeTileStyle}" />
+                <mah:Tile Title="Weather"
+                          Background="#1E90FF"
+                          Style="{StaticResource LargeTileStyle}" />
+                <mah:Tile Title="Weather"
+                          Background="#1E90FF"
+                          Style="{StaticResource SmallTileStyle}" />
+                <mah:Tile Title="Store"
+                          Background="Green"
+                          Style="{StaticResource SmallTileStyle}" />
+            </WrapPanel>
+        </ScrollViewer>
     </Grid>
 </mah:MetroWindow>

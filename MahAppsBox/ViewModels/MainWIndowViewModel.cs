@@ -1,14 +1,16 @@
-﻿namespace MahAppsBox
+﻿using System.Windows.Input;
+
+namespace MahAppsBox.ViewModels
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using Annotations;
 
-    public class ViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : ViewModelBase
     {
+        private IDialogService _dialogService;
         private bool _boolValue;
         private double _doubleValue;
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public bool BoolValue
         {
@@ -38,14 +40,18 @@
             }
         }
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public ICommand ShowSimpleMessageDialogCommand { get; private set; }
+
+        public MainWindowViewModel(IDialogService dialogService)
         {
-            var handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
+            _dialogService = dialogService;
+
+            ShowSimpleMessageDialogCommand = new RelayCommand(ShowSimpleMessageDialog);
+        }
+
+        private async void ShowSimpleMessageDialog(object parameter)
+        {
+            await _dialogService.ShowMessageDialog("Hello I am a simple message dialog!");
         }
     }
 }

@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using MahAppsBox.ViewModels;
+using Ninject;
 
 namespace MahAppsBox
 {
@@ -13,5 +15,14 @@ namespace MahAppsBox
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            var kernel = new StandardKernel();
+            kernel.Bind<IDialogService>().To<DialogService>();
+            kernel.Bind<IViewModel>().To<MainWindowViewModel>();
+
+            var mainWindow = kernel.Get<MainWindow>();
+            mainWindow.Show();
+        }
     }
 }

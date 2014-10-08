@@ -1,4 +1,4 @@
-﻿using System.Windows;
+﻿using MahAppsBox.ViewModels;
 
 namespace MahAppsBox
 {
@@ -9,10 +9,11 @@ namespace MahAppsBox
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        public MainWindow()
+        public MainWindow(IViewModel viewModel)
         {
             InitializeComponent();
-            DataContext = new ViewModel();
+
+            DataContext = viewModel;
         }
     }
 }
