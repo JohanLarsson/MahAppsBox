@@ -1,3 +1,3 @@
 MahAppsBox
 ==========
-Playing with matapps
+Playing with MahApps
